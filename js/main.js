@@ -4,6 +4,9 @@ var crypto = require('crypto'),
     algorithm = 'aes-256-ctr',
     password = 'd6F3Efeq';
 
+var prompt = require('prompt');
+prompt.start();
+
 function encrypt(text){
     var cipher = crypto.createCipher(algorithm,password);
     var crypted = cipher.update(text,'utf8','hex');
@@ -18,6 +21,9 @@ function decrypt(text){
     return dec;
 }
 
-var m = encrypt("Enki encryption.");
-console.log(m);
-console.log(decrypt(m));
+prompt.get(['message'], function (err, result) {
+    console.log('Message: ' + result.message);
+    var m = encrypt(result.message);
+    console.log('Encrypted: ' + m);
+    console.log('Decrypted: ' + decrypt(m));
+});
