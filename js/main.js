@@ -9,9 +9,9 @@ prompt.start();
 
 function encrypt(text){
     var cipher = crypto.createCipher(algorithm,password);
-    var crypted = cipher.update(text,'utf8','hex');
+    var encrypted = cipher.update(text,'utf8','hex');
     crypted += cipher.final('hex');
-    return crypted;
+    return encrypted;
 }
 
 function decrypt(text){
