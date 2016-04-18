@@ -10,15 +10,22 @@ prompt.start();
 function encrypt(text){
     var cipher = crypto.createCipher(algorithm,password);
     var encrypted = cipher.update(text,'utf8','hex');
-    crypted += cipher.final('hex');
+    encrypted += cipher.final('hex');
     return encrypted;
 }
 
 function decrypt(text){
     var decipher = crypto.createDecipher(algorithm,password);
-    var dec = decipher.update(text,'hex','utf8');
-    dec += decipher.final('utf8');
-    return dec;
+    var decrypted = decipher.update(text,'hex','utf8');
+    decrypted += decipher.final('utf8');
+    return decrypted;
+}
+
+function hash() {
+    const hash = crypto.createHash('sha256');
+    hash.update('Hash digest of Enki!');
+    var hash_final = hash.digest('hex');
+    return hash_final;
 }
 
 prompt.get(['message'], function (err, result) {
@@ -26,4 +33,5 @@ prompt.get(['message'], function (err, result) {
     var m = encrypt(result.message);
     console.log('Encrypted: ' + m);
     console.log('Decrypted: ' + decrypt(m));
+    console.log('Hash: ' + hash());
 });
