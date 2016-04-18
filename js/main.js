@@ -37,11 +37,23 @@ function hmac() {
 function signature() {
     const sign = crypto.createSign('RSA-SHA256');
     sign.update('Digital Signature Required.');
+
+    // example, needs real getters implementation
     const private_key = getThePrivateKey();
     var digi_sign = (sign.sign(private_key, 'hex'));
     return digi_sign;
 }
 
+function verifySign() {
+    const verify = crypto.createVerify('RSA-SHA256');
+    verify.update('Data to sign.');
+
+    // example, needs real getters implementation
+    const public_key = getPublicKey();
+    const signature = getSignature();
+    var verified = (verify.verify(public_key, signature));
+    return verified;
+}
 
 
 prompt.get(['message'], function (err, result) {
@@ -52,4 +64,5 @@ prompt.get(['message'], function (err, result) {
     console.log('Hash: ' + hash());
     console.log('Hmac: ' + hmac());
     // console.log('Digital Signature: ' + signature());
+    // console.log('Verified Signature: ' + verifySign());
 });
