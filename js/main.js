@@ -28,10 +28,17 @@ function hash() {
     return hash_final;
 }
 
+function hmac() {
+    const hmac = crypto.createHmac('sha256', 'a secret');
+    hmac.update('test');
+    console.log(hmac.digest('hex'));
+}
+
 prompt.get(['message'], function (err, result) {
     console.log('Message: ' + result.message);
     var m = encrypt(result.message);
     console.log('Encrypted: ' + m);
     console.log('Decrypted: ' + decrypt(m));
     console.log('Hash: ' + hash());
+    console.log('Hmac: ' + hmac());
 });
