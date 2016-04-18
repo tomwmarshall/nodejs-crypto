@@ -25,5 +25,5 @@ prompt.get(['message'], function (err, result) {
     console.log('Message: ' + result.message);
     var m = encrypt(result.message);
     console.log('Encrypted: ' + m);
-    console.log('Decryped (original): ' + decrypt(m));
+    console.log('Decrypted: ' + decrypt(m));
 });
