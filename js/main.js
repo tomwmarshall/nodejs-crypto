@@ -42,9 +42,18 @@ function hash() {
 
 function hmac() {
     const hmac = crypto.createHmac('sha256', 'a secret');
-    hmac.update('test');
+    hmac.update('create a hmac');
     console.log(hmac.digest('hex'));
 }
+
+function hmac_new() {
+    const secret = "hello hello";
+    const hmac_secret = crypto.createHmac('sha256', secret)
+        .update('hey hey')
+        .digest('hex');
+    return hmac_secret;
+}
+
 
 function signature() {
     const sign = crypto.createSign('RSA-SHA256');
@@ -75,6 +84,7 @@ prompt.get(['message'], function (err, result) {
     console.log('Decrypted text: ' + d_text(m));
     console.log('Hash: ' + hash());
     console.log('Hmac: ' + hmac());
+    console.log('Hmac: ' + hmac_new());
     // console.log('Digital Signature: ' + signature());
     // console.log('Verified Signature: ' + verifySign());
 
