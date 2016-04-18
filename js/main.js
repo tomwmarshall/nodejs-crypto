@@ -34,6 +34,16 @@ function hmac() {
     console.log(hmac.digest('hex'));
 }
 
+function signature() {
+    const sign = crypto.createSign('RSA-SHA256');
+    sign.update('Digital Signature Required.');
+    const private_key = getThePrivateKey();
+    var digi_sign = (sign.sign(private_key, 'hex'));
+    return digi_sign;
+}
+
+
+
 prompt.get(['message'], function (err, result) {
     console.log('Message: ' + result.message);
     var m = encrypt(result.message);
@@ -41,4 +51,5 @@ prompt.get(['message'], function (err, result) {
     console.log('Decrypted: ' + decrypt(m));
     console.log('Hash: ' + hash());
     console.log('Hmac: ' + hmac());
+    // console.log('Digital Signature: ' + signature());
 });
